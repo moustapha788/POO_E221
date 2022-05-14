@@ -1,0 +1,17 @@
+{
+    "name": "moustapha/poo_e221",
+    "autoload": {
+        "psr-4": {
+            "App\\Model\\": "models/",
+            "App\\Core\\": "core/",
+            "App\\Controller\\": "controllers/",
+            "App\\Src\\": "src/",
+            "App\\Exeption\\": "exeptions/"
+        }
+    },
+    "authors": [{
+        "name": "Moustapha788",
+        "email": "gayemoustaphsmg97@gmail.com"
+    }],
+    "require": {}
+}
