@@ -34,11 +34,22 @@ abstract class User extends Personne
 		return $this;
 	}
 	// REQUÊTAGE	
-	public function findUserByLoginAndPassword(string $login, string $password): object|null
+	public function insert(): int
 	{
-		// $sql="SELECT * FROM ".parent::getTableName()." WHERE login=? and password=?";
-		// $data=[$login,$password];
-		// self::findBy($sql,$data,true);
-		return null;
+		// pour (RP et AC) et Etudiant qui doit redéfinir encore 
+		$db = parent::database();
+		$db->openConnection();
+		$sql = "INSERT INTO `personne` (`nom_complet`, `role`,`login`, `password`) VALUES (?,?,?,?);";
+		$data = [$this->nomComplet, parent::getRole(), $this->login, $this->password];
+		$result = $db->executeUpdate($sql, $data);
+		$db->closeConnexion();
+		echo $sql;
+		return $result;
+	}
+	public static function findUserByLoginAndPassword(string $login, string $password): object|null
+	{
+		$sql = "SELECT * FROM " . parent::getTableName() . " WHERE login=? and password=?";
+		$data = [$login, $password];
+		return parent::findBy($sql, $data,true);
 	}
 }

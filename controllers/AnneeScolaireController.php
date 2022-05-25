@@ -2,6 +2,12 @@
 
 namespace App\Controller;
 
-class AnneeScolaireController
+use App\Core\Controller;
+
+class AnneeScolaireController extends Controller
 {
+    public function lister()
+    {
+        
+    }
 }

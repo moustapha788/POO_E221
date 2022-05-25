@@ -26,7 +26,7 @@ abstract class Personne extends Model
 	public static function getRole(): string
 	{
 		// self::$role = "ROLE_" . strtoupper(get_called_class());
-		self::$role = "ROLE_" . strtoupper(str_replace(__NAMESPACE__.'\\', "", get_called_class()));
+		self::$role = "ROLE_" . strtoupper(str_replace(__NAMESPACE__ . '\\', "", get_called_class()));
 		return self::$role;
 	}
 	public static function getNbrPersonne(): int
@@ -44,16 +44,21 @@ abstract class Personne extends Model
 		self::$role = $role;
 	}
 	// REQUÊTAGE
-	public static function findAll(): array
+	public static function findAll(): array|null
 	{
-		if (get_called_class() === "User") {
-			$sql = "SELECT * FROM " . parent::getTableName() . " WHERE `role` not like `ROLE_PROFESSEUR`";
-		} else if (get_called_class() === "Personne") {
+		$data = null;
+		if (parent::rm_nameSpace_in_called_class() === "User") {
+			//Tous les utilisateurs(sans les professeurs)
+			$sql = "SELECT * FROM " . parent::getTableName() . " WHERE role NOT LIKE ?";
+			$data = ['ROLE_PROFESSEUR'];
+		} else if (parent::rm_nameSpace_in_called_class() === "Personne") {
+			//Toutes les personnes
 			$sql = "SELECT * FROM " . parent::getTableName();
 		} else {
-			$sql = "SELECT * FROM " . parent::getTableName() . " WHERE `role` like `" . self::getRole() . "`";
+			//soit tous les AC|RP|Etudiant|Professeur(ici | = ou)
+			$sql = "SELECT * FROM " . parent::getTableName() . " WHERE role LIKE ?";
+			$data = [self::getRole()];
 		}
-		echo $sql;
-		return [];
+		return parent::findBy($sql, $data);
 	}
 }

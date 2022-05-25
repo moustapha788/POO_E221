@@ -54,4 +54,16 @@ class Etudiant extends User
 	{
 		return [];
 	}
+	public function insert(): int
+	{
+		// Etudiant qui redéfini encore 
+		$db = parent::database();
+		$db->openConnection();
+		$sql = "INSERT INTO `personne` (`nom_complet`, `role`, `login`, `password`, `matricule`, `sexe`, `adresse`) VALUES (?,?,?,?,?,?,?);";
+		$data = [$this->nomComplet, parent::getRole(), $this->login, $this->password, $this->matricule, $this->sexe, $this->adresse];
+		$result = $db->executeUpdate($sql, $data);
+		$db->closeConnexion();
+		echo $sql;
+		return $result;
+	}
 }

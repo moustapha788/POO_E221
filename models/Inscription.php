@@ -32,8 +32,8 @@ class Inscription extends Model
 		WHERE
 			p.id = i.ac_id
 			and p.role LIKE 'ROLE_AC'
-			and i.id = $this->id";
-		return new AC();
+			and i.id =?";
+		return parent::findBy($sql, [$this->id]);
 	}
 	/* get the student */
 	public function etudiant(): Etudiant
@@ -46,8 +46,8 @@ class Inscription extends Model
 		WHERE
 			p.id = i.ac_id
 			and p.role LIKE 'ROLE_ETUDIANT'
-			and i.id = $this->id";
-		return new Etudiant();
+			and i.id = ?";
+		return parent::findBy($sql, [$this->id]);
 	}
 	/* get the year */
 	public function anneeScolaire(): AnneeScolaire
@@ -59,8 +59,8 @@ class Inscription extends Model
 			annee_scolaire a
 		WHERE
 			a.id = i.annee_scolaire_id
-			and i.id = $this->id";
-		return new AnneeScolaire();
+			and i.id = ?";
+		return parent::findBy($sql, [$this->id]);
 	}
 	/* get the class */
 	public function classe(): Classe

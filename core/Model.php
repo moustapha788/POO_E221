@@ -9,6 +9,10 @@ class Model implements IModel
     public function __construct()
     {
     }
+    protected static function database(): Database
+    {
+        return new Database();
+    }
 
     // GETTERS
     public static function getTableName(): string
@@ -37,16 +41,16 @@ class Model implements IModel
     }
     public static function rm_nameSpace_in_called_class(): string|array
     {
-        $input=get_called_class();
-        $array=explode('\\',$input);
-        $input=array_pop($array);        
+        $array = explode('\\', get_called_class());
+        $input = trim(array_pop($array));
         return $input;
     }
     /* 
     TODO::: LE COMMENT ?
     */
-    public function insert(string $sql): int
+    public function insert(): int
     {
+        // $sql="INSERT INTO `personne` (`id`, `nom_complet`, `role`, `login`, `password`, `grade`, `matricule`, `sexe`, `adresse`) VALUES (NULL, 'Sékou Ba Dialla', 'ROLE_PROFESSEUR', NULL, NULL, 'Ingénieur', NULL, NULL, NULL);";
         return 0;
     }
     public function update(): int
@@ -55,26 +59,31 @@ class Model implements IModel
     }
     public static function delete(int $id): int
     {
+        $db = self::database();
+        $db->openConnection();
         $sql = "DELETE FROM " . self::getTableName() . " WHERE id =? ";
-        echo $sql;
-
-        return 0;
+        $data = [$id];
+        $result = $db->executeUpdate($sql, $data);
+        $db->closeConnexion();
+        return $result;
     }
-    public static function findAll(): array
+    public static function findAll(): array|null
     {
         $sql = "SELECT * FROM " . self::getTableName();
-        echo $sql;
-        return [];
+        return self::findBy($sql);
     }
     public static function findBy(string $sql, array $data = null, bool $single = false): object|array|null
     {
-        return null;
+        $db = self::database();
+        $db->openConnection();
+        $result = $db->executeSelect($sql, $data, $single);
+        $db->closeConnexion();
+        return $result;
     }
     public static function findById(int $id): object|null
     {
         $sql = "SELECT * FROM " . self::getTableName() . " WHERE id =? ";
-        echo $sql;
-
-        return null;
+        $data = [$id];
+        return self::findBy($sql, $data, true);
     }
 }

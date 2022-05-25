@@ -6,7 +6,7 @@
             "App\\Core\\": "core/",
             "App\\Controller\\": "controllers/",
             "App\\Src\\": "src/",
-            "App\\Exeption\\": "exeptions/"
+            "App\\Exception\\": "exceptions/"
         }
     },
     "authors": [{

@@ -1,0 +1,57 @@
+:root {
+    --WEB_IMAGES: ../images/;
+}
+
+body {
+    background: url(../images/fumee.jpg);
+    background-size: cover;
+}
+
+.page {
+    height: 100vh;
+    min-width: 100%;
+    margin: 0 auto !important;
+}
+
+header.my_header {
+    background: url(../images/fumee.jpg);
+    /* background-size: cover; */
+}
+
+.bg-mine {
+    background-color: #192a56;
+}
+
+.bg-mine li>a:hover {
+    background-color: #e84118;
+}
+
+.text-mine {
+    color: red;
+    text-shadow: #e84118 1px 0;
+}
+
+.display-mine {
+    font-size: 1.25rem;
+}
+
+.bg-opacity-mine {
+    background: #192a56 0.2 !important;
+}
+
+.border-mine {
+    border: 5px solid #e84118!important;
+}
+
+.btn-mine {
+    background-color: #e84118;
+}
+
+a {
+    color: white!important;
+}
+
+form.my_login {
+    background: linear-gradient(rgba(0, 0, 0, 0.59), rgba(0, 0, 0, 0.53)), url(../images/fumee.jpg);
+    background-size: cover;
+}

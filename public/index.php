@@ -1,29 +1,18 @@
 <?php
+
+
+
+
+/* 
+$ le front controller charge:
+    l'autoload
+    le router
+*/
 require_once("../vendor/autoload.php");
-use App\Model\Personne;
-use App\Model\User;
-use App\Model\Professeur;
-use App\Model\RP;
-use App\Model\AC;
-use App\Model\Etudiant;
-use App\Model\AnneeScolaire;
-use App\Model\Classe;
-use App\Model\Module;
-use App\Model\Demande;
-use App\Model\Inscription;
-use App\Core\Model;
+require_once("../core/functions.php");
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-// $ac=new App\Model\RP();
-// var_dump($ac->getRole());
+// var_dump("session_status::",session_status());
+require_once("../routes/route.web.php");

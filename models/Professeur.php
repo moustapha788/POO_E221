@@ -36,6 +36,18 @@ class Professeur extends Personne
 	/* get the classes */
 	public function classes(): array
 	{
-		return [];
+		$sql="";
+		return parent::findBy($sql,[$this->id]);
+	}
+	public function insert(): int
+	{
+		$db = parent::database();
+		$db->openConnection();
+		$sql = "INSERT INTO `personne` (`nom_complet`, `role`, `grade`) VALUES (?,?,?);";
+		$data = [$this->nomComplet, parent::getRole(), $this->grade]; //['Sékou Ba Dialla', 'ROLE_PROFESSEUR', 'Ingénieur'];
+		$result = $db->executeUpdate($sql, $data);
+		$db->closeConnexion();
+		echo $sql;
+		return $result;
 	}
 }

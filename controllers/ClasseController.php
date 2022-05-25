@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
-class ClasseController
+use App\Core\Controller;
+
+class ClasseController extends Controller
 {
-    public function listerClasse()
+    public function listerClasses()
     {
     }
     public function creerClasse()
